@@ -19,7 +19,7 @@ public class SoapParser {
 
     public SoapParser() {
         parserMap = new HashMap<>();
-        parserMap.put(PbossConstant.BIPCODE_USERSTATUSCHGREQ, "UserStatusChgReqParser");
+        parserMap.put(PbossConstant.BIPCODE_USERSTATUSCHGREQ, "com.msl.pboss.up.parser.UserStatusChgReqParser");
     }
 
     public HeaderBean parseMsg(String xml) {
@@ -33,9 +33,19 @@ public class SoapParser {
         }
 
         HeaderBean headerBean = parseHeaderMsg(root);
+        if (headerBean == null) {
+            System.out.println("error----------: header is null");
+            return null;
+        }
+        String reqBipcode = headerBean.getBIPCode();
+        System.out.println("[parseMsg]==========request bipcode is " + reqBipcode);
+        if (!parserMap.containsKey(reqBipcode)) {
+            System.out.println("error----------: bip code is not right");
+        }
         HeaderBean bodyBean = null;
         try {
-            AbstractSoapParser soapParser = (AbstractSoapParser)(Class.forName(parserMap.get(headerBean.getBIPCode())).newInstance());
+            String parserName = parserMap.get(headerBean.getBIPCode());
+            AbstractSoapParser soapParser = (AbstractSoapParser)(Class.forName(parserName).newInstance());
             if (soapParser != null) {
                 bodyBean = soapParser.parseBody(root);
             }

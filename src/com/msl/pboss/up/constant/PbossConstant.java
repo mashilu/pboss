@@ -7,20 +7,20 @@ import org.omg.CORBA.PUBLIC_MEMBER;
  */
 public class PbossConstant {
 
-    public static final String BODY = "SOAP-ENV:Body";
-    public static final String HEADER = "SOAP-ENV:Header";
-    public static final String HEADER_ADDRESS = "ns1:Address";
-    public static final String HEADER_USERNAME = "ns1:Username";
-    public static final String HEADER_PASSWORD = "ns1:Password";
-    public static final String HEADER_BIPCODE = "ns1:BIPCode";
-    public static final String HEADER_BIPVER = "ns1:BIPVer";
-    public static final String HEADER_ACTIVITYCODE = "ns1:ActivityCode";
-    public static final String HEADER_PROCID = "ns1:ProcID";
-    public static final String HEADER_TRANSIDO = "ns1:TransIDO";
-    public static final String HEADER_TRANSIDH = "ns1:TransIDH";
-    public static final String HEADER_PROCESSTIME = "ns1:ProcessTime";
-    public static final String HEADER_TESTFLAG = "ns1:TestFlag";
-    public static final String HEADER_SVCCONVER = "ns1:SvcConVer";
+    public static final String BODY = "Body";
+    public static final String HEADER = "Header";
+    public static final String HEADER_ADDRESS = "Address";
+    public static final String HEADER_USERNAME = "Username";
+    public static final String HEADER_PASSWORD = "Password";
+    public static final String HEADER_BIPCODE = "BIPCode";
+    public static final String HEADER_BIPVER = "BIPVer";
+    public static final String HEADER_ACTIVITYCODE = "ActivityCode";
+    public static final String HEADER_PROCID = "ProcID";
+    public static final String HEADER_TRANSIDO = "TransIDO";
+    public static final String HEADER_TRANSIDH = "TransIDH";
+    public static final String HEADER_PROCESSTIME = "ProcessTime";
+    public static final String HEADER_TESTFLAG = "TestFlag";
+    public static final String HEADER_SVCCONVER = "SvcConVer";
 
     // BIPCODE
     public static final String BIPCODE_USERSTATUSCHGREQ = "BTP2N001";

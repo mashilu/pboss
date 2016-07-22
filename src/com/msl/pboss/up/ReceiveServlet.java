@@ -1,5 +1,7 @@
 package com.msl.pboss.up;
 
+import com.msl.pboss.up.parser.SoapParser;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,18 +26,18 @@ public class ReceiveServlet extends HttpServlet {
             throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         int size = req.getContentLength();
-        System.out.printf("=============content size is %d\n", size);
+        System.out.printf("［doPost]=============content size is %d\n", size);
 
         InputStream is = req.getInputStream();
         byte[] reqBodyBytes = readBytes(is, size);
 
         String res = new String(reqBodyBytes, "UTF-8");
 
-        System.out.println("===========content string is" + res);
+        System.out.println("［doPost]===========content string is" + res);
 
-        System.out.println("===========begin to parse.........");
-
-
+        System.out.println("［doPost]===========begin to parse.........");
+        SoapParser parser = new SoapParser();
+        parser.parseMsg(res);
     }
 
     public static final byte[] readBytes(InputStream is, int contentLen) {

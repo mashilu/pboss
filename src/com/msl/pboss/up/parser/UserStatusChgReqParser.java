@@ -38,7 +38,8 @@ public class UserStatusChgReqParser extends AbstractSoapParser {
                 new ArrayList<UserStatusChgReqBean.UserStatusInfo>();
         UserStatusChgReqBean.UserStatusInfo userStatusInfo = null;
 
-        for (Element userStatusInfoEle : userStatusInfoEleList) {
+        for (Object obj : userStatusInfoEleList) {
+            Element userStatusInfoEle = (Element)obj;
             if (!checkUserStatusInfo(userStatusInfoEle)) {
                 System.out.println("error----------: one UserStatusInfo element is wrong");
                 break;
@@ -120,6 +121,51 @@ public class UserStatusChgReqParser extends AbstractSoapParser {
             return false;
         }
 
+        // UserStatus 1 String F2
+        elementList = userStatusInfoEle.elements(PbossConstant.USERSTATUS);
+        if (elementList.size() != 1) {
+            System.out.println("error----------: [userStatusInfo.UserStatus]: count is not 1");
+            return false;
+        }
+        element = (Element)elementList.get(0);
+        if (element.getText().length() != PbossConstant.USERSTATUS_LEN_F) {
+            System.out.println("error----------: [userStatusInfo.UserStatus]:  length is not between in 0 and " + PbossConstant.USERSTATUS_LEN_F);
+            return false;
+        } else if (checkUserStatus(element.getText())) {
+            System.out.println("error----------: [userStatusInfo.UserStatus]: format is wrong!");
+            return false;
+        }
+
+        // StatusOprTime 1 String F2
+        elementList = userStatusInfoEle.elements(PbossConstant.STATUSOPRTIME);
+        if (elementList.size() != 1) {
+            System.out.println("error----------: [userStatusInfo.StatusOprTime]: count is not 1");
+            return false;
+        }
+        element = (Element)elementList.get(0);
+        if (element.getText().length() != PbossConstant.STATUSOPRTIME_LEN_F) {
+            System.out.println("error----------: [userStatusInfo.StatusOprTime]:  length is not between in 0 and " + PbossConstant.STATUSOPRTIME_LEN_F);
+            return false;
+        } else if (checkStatusOprTime(element.getText())) {
+            System.out.println("error----------: [userStatusInfo.StatusOprTime]: format is wrong!");
+            return false;
+        }
+
+        // ProvincdID 1 String F3
+        elementList = userStatusInfoEle.elements(PbossConstant.PROVINCDID);
+        if (elementList.size() != 1) {
+            System.out.println("error----------: [userStatusInfo.ProvincdID]: count is not 1");
+            return false;
+        }
+        element = (Element)elementList.get(0);
+        if (element.getText().length() != PbossConstant.PROVINCDID_LEN_F) {
+            System.out.println("error----------: [userStatusInfo.ProvincdID]:  length is not between in 0 and " + PbossConstant.PROVINCDID_LEN_F);
+            return false;
+        } else if (checkProvincdID(element.getText())) {
+            System.out.println("error----------: [userStatusInfo.ProvincdID]: format is wrong!");
+            return false;
+        }
+
         return true;
     }
 
@@ -143,7 +189,9 @@ public class UserStatusChgReqParser extends AbstractSoapParser {
     }
     private boolean checkUserStatus(String text) {
         // TODO: check the format of UserStatus
-        return true;
+        if (text != null && (text.equals("00") || text.equals("02")))
+            return true;
+        return false;
     }
     private boolean checkStatusOprTime(String text) {
         // TODO: check the format of StatusOprTime
